@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Beer Festival Drink Finder</string>
+
+	<string name="app_name">Beer Festival Drink Finder</string>
+	<string name="search_drinks_button_text">Search Drinks</string>
+	<string name="view_wishlist_button_text">View Wishlist</string>
+	<string name="update_data_button_text">Update Data</string>
+
 </resources>
