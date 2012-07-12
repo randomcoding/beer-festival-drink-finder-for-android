@@ -14,7 +14,7 @@ import android.os.Bundle
  * Created On: 11 Jul 2012
  *
  */
-class SearchDrinkActivity extends Activity {
+class SearchDrinkActivity extends Activity with TypedActivity {
 
 	override def onCreate(savedInstanceState: Bundle) {
 		super.onCreate(savedInstanceState)

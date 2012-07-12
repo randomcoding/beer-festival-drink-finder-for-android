@@ -24,7 +24,7 @@ object General {
     proguardSettings ++
     AndroidManifestGenerator.settings ++
     AndroidMarketPublish.settings ++ Seq (
-      keyalias in Android := "change-me",
+      keyalias in Android := "change-me", // TODO: Make this dreived from a variable read from a file
       libraryDependencies += "org.scalatest" %% "scalatest" % "1.8" % "test"
     )
 
@@ -38,10 +38,18 @@ object General {
 }
 
 object AndroidBuild extends Build {
-  lazy val main = Project (
-    "Beer Festival Drink Finder",
+  lazy val root = Project (
+    "root",
     file("."),
     settings = General.fullAndroidSettings ++ General.eclipseAndroidSettings
+  ) aggregate(client, tests)
+
+  lazy val client = Project (
+    "client",
+    file("client"),
+    settings = General.fullAndroidSettings ++ General.eclipseAndroidSettings ++ Seq (
+      name := "Beer Festival Drink Finder"
+    )
   )
 
   lazy val tests = Project (
@@ -52,5 +60,5 @@ object AndroidBuild extends Build {
                General.proguardSettings ++ Seq (
       name := "Beer Festival Drink FinderTests"
     ) ++ General.eclipseAndroidSettings
-  ) dependsOn main
+  ) dependsOn client
 }
