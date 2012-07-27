@@ -23,7 +23,7 @@ import android.view.View
 import android.os.Bundle
 
 /**
- * TODO: Comment for
+ * Activity view to handle the update of the apps data cache.
  *
  * @author RandomCoder <randomcoder@randomcoding.co.uk>
  *
@@ -33,6 +33,7 @@ class UpdateDataActivity extends TypedActivity {
 
   override def onCreate(state: Bundle) = {
     super.onCreate(state)
+    setContentView(R.layout.activity_update_data)
   }
 
 }

@@ -32,7 +32,8 @@ import android.os.Bundle
  */
 class SearchDrinkActivity extends Activity with TypedActivity {
 
-	override def onCreate(savedInstanceState: Bundle) {
-		super.onCreate(savedInstanceState)
-	}
+  override def onCreate(savedInstanceState: Bundle) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_search_drink)
+  }
 }
