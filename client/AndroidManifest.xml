@@ -21,6 +21,13 @@
 				android:name="android.support.PARENT_ACTIVITY"
 				android:value="uk.co.randomcoding.drinkfinder.android.MainActivity" />
 		</activity>
+		<activity
+			android:name=".UpdateDataActivity"
+			android:label="@string/title_activity_update_data" >
+			<meta-data
+				android:name="android.support.PARENT_ACTIVITY"
+				android:value="uk.co.randomcoding.drinkfinder.android.MainActivity" />
+		</activity>
 	</application>
 
 	<uses-sdk android:minSdkVersion="10" />
