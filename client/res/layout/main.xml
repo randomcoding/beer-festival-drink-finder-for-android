@@ -11,12 +11,15 @@
 		android:onClick="showSearchDrinks"
 		android:text="@string/search_drinks_button_text" />
 
-	<Button
+	<!--
+         <Button
 		android:id="@+id/viewWishListButton"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:onClick="showWishList"
 		android:text="@string/view_wishlist_button_text" />
+	-->
+
 
 	<Button
 		android:id="@+id/updateDataButton"
