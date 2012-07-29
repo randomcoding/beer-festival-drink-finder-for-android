@@ -1,15 +1,33 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/LinearLayout1"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent" >
+	android:layout_height="match_parent"
+	android:orientation="vertical" >
 
 	<TextView
-		android:layout_width="wrap_content"
+		android:id="@+id/update_view_select_festival_text"
+		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:layout_centerHorizontal="true"
-		android:layout_centerVertical="true"
-		android:padding="@dimen/padding_medium"
-		android:text="@string/hello_world"
-		tools:context=".UpdateDataActivity" />
+		android:text="@string/select_festival_spinner_prompt"
+		android:textAppearance="?android:attr/textAppearanceMedium" />
 
-</RelativeLayout>
+	<Spinner
+		android:id="@+id/selectFestival"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" />
+
+	<TextView
+		android:id="@+id/update_view_selected_festival"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:text="..."
+		android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	<Button
+		android:id="@+id/update_view_update_data_button"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/update_data_button_text" />
+
+</LinearLayout>

@@ -37,12 +37,12 @@ class MainActivity extends Activity with TypedActivity {
   }
 
   def updateData(view: View) {
-    // TODO: Update the data from the online store and save in zipped file
     val intent = new Intent(this, classOf[UpdateDataActivity])
     startActivity(intent)
   }
 
   def showWishList(view: View) {
     // TODO: Create intent to switch to the wishlist view
+    // Not planned at this time
   }
 }

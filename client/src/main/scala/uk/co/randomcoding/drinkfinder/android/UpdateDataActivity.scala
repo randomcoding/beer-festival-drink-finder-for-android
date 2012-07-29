@@ -21,6 +21,10 @@ package uk.co.randomcoding.drinkfinder.android
 
 import android.view.View
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.app.Activity
+import TypedResource._
 
 /**
  * Activity view to handle the update of the apps data cache.
@@ -29,11 +33,23 @@ import android.os.Bundle
  *
  * Created On: 27 Jul 2012
  */
-class UpdateDataActivity extends TypedActivity {
+class UpdateDataActivity extends Activity with TypedActivity {
 
   override def onCreate(state: Bundle) = {
     super.onCreate(state)
     setContentView(R.layout.activity_update_data)
+
+    val festivalSelect: Spinner = findView(TR.selectFestival)
+
+    festivalSelect.setAdapter(createSpinnerAdapter)
+
+    // TODO: Add listener - implement new class that takes funcs for each of the common activities
+    // and provides empty defaults for all.
+    // Also needs to implement common functionality such as selection getters etc.
+  }
+
+  private[this] def createSpinnerAdapter: ArrayAdapter[CharSequence] = {
+    ArrayAdapter.createFromResource(this, R.array.available_festival_names, android.R.layout.simple_spinner_dropdown_item)
   }
 
 }

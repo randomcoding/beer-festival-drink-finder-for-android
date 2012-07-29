@@ -9,5 +9,12 @@
 	<string name="title_activity_search_drink">Search for a Drink</string>
 	<string name="data_update_host_url">http://localhost:8080</string>
 	<string name="title_activity_update_data">Update Data</string>
+	<string name="default_web_service_url">http://festivaldrinkfinder.cloudfoundry.com</string>
+	<string name="all_drinks_api_update_uri">/api/drinks/%%FEST_ID%%/all</string>
+	<string name="select_festival_spinner_prompt">Select Festival</string>
+
+	<string-array name="available_festival_names">
+		<item>Worcester CAMRA Beer, Cider &amp; Perry</item>
+	</string-array>
 
 </resources>
