@@ -25,6 +25,18 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.app.Activity
 import TypedResource._
+import android.content.Context
+import android.app.DownloadManager
+import android.net.Uri
+import java.io.File
+import org.apache.http.impl.client.DefaultHttpClient
+import org.apache.http.client.methods.HttpGet
+import org.apache.http.HttpStatus
+import java.io.IOException
+import uk.co.randomcoding.drinkfinder.android.util.RestDownloader
+import java.io.FileOutputStream
+import uk.co.randomcoding.drinkfinder.android.util.BackgroundDownloader
+import android.content.Intent
 
 /**
  * Activity view to handle the update of the apps data cache.
@@ -38,18 +50,23 @@ class UpdateDataActivity extends Activity with TypedActivity {
   override def onCreate(state: Bundle) = {
     super.onCreate(state)
     setContentView(R.layout.activity_update_data)
-
-    val festivalSelect: Spinner = findView(TR.selectFestival)
-
-    festivalSelect.setAdapter(createSpinnerAdapter)
-
-    // TODO: Add listener - implement new class that takes funcs for each of the common activities
-    // and provides empty defaults for all.
-    // Also needs to implement common functionality such as selection getters etc.
   }
 
-  private[this] def createSpinnerAdapter: ArrayAdapter[CharSequence] = {
-    ArrayAdapter.createFromResource(this, R.array.available_festival_names, android.R.layout.simple_spinner_dropdown_item)
+  def updateData(view: View) {
+    // TODO: Replace with looked up value (or derived from view data
+    val dataUri = "http://localhost:8080/api/WCBCF/drinks/all/"
+
+    // TODO: Add progress monitoring
+    val dataFile = new File(getExternalFilesDir(null), "WCBCFData.json")
+    val downloadTask = new BackgroundDownloader
+    try {
+      downloadTask.execute((dataUri, new FileOutputStream(dataFile)))
+      val switchToSearch = new Intent(this, classOf[SearchDrinkActivity])
+      startActivity(switchToSearch)
+    }
+    catch {
+      case ioe: IOException => // TODO Display Error
+    }
   }
 
 }
