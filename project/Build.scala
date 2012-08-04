@@ -16,7 +16,7 @@ object General {
 
   val proguardSettings = Seq (
     useProguard in Android := true,
-    proguardOption in Android := "-keep class scala.Function1, scala.Tuple2, scala.collection.Seq"
+    proguardOption in Android := "-keep class scala.Function1, scala.Tuple2, scala.collection.Seq, scala.Option, scala.Function2"
   )
 
   lazy val fullAndroidSettings =

@@ -84,6 +84,7 @@
 		android:id="@+id/drinkSearchButton"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
+		android:onClick="searchDrinks"
 		android:text="@string/search_drinks_button_text" />
 
 </LinearLayout>

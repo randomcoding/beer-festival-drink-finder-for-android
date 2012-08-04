@@ -19,31 +19,17 @@
  */
 package uk.co.randomcoding.drinkfinder.android
 
-import android.view.View
-import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.app.Activity
-import TypedResource._
-import android.content.Context
-import android.app.DownloadManager
-import android.net.Uri
-import java.io.File
-import org.apache.http.impl.client.DefaultHttpClient
-import org.apache.http.client.methods.HttpGet
-import org.apache.http.HttpStatus
-import java.io.IOException
-import uk.co.randomcoding.drinkfinder.android.util.RestDownloader
-import java.io.FileOutputStream
-import android.content.Intent
-import android.util.Log
-import uk.co.randomcoding.drinkfinder.android.util.RestDownloader
-import java.io.OutputStream
-import android.app.Dialog
-import android.content.DialogInterface
-import android.app.AlertDialog
+import java.io.{ FileOutputStream, File }
 
-import uk.co.randomcoding.drinkfinder.android.util.DialogueHelpers._
+import uk.co.randomcoding.drinkfinder.android.util.DialogueHelpers.alertDialogue
+import uk.co.randomcoding.drinkfinder.android.util.RestDownloader
+import uk.co.randomcoding.drinkfinder.android.util.ExternalStorageHelper._
+
+import android.app.{ Dialog, Activity }
+import android.content.{ Intent, DialogInterface }
+import android.os.Bundle
+import android.util.Log
+import android.view.View
 
 /**
  * Activity view to handle the update of the apps data cache.
@@ -66,10 +52,11 @@ class UpdateDataActivity extends Activity with TypedActivity {
 
   def updateData(view: View) {
     // TODO: Replace with looked up value (or derived from view data
-    val dataUri = "http://192.168.2.15:8080/api/WCBCF/drinks/all"
+    val festivalId = "WCBCF"
+    val dataUri = "http://192.168.2.15:8080/api/%s/drinks/all".format(festivalId)
 
     // TODO: Add progress monitoring
-    val dataFile = new File(getExternalFilesDir(null), "WCBCFData.json")
+    val dataFile = festivalDataFile(this, festivalId)
     Log.d(TAG, "Got File Handle: %s".format(dataFile.getAbsolutePath))
 
     try {

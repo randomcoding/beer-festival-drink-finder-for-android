@@ -17,36 +17,34 @@
  * Contributors:
  *    RandomCoder <randomcoder@randomcoding.co.uk> - initial API and implementation and/or initial documentation
  */
-package uk.co.randomcoding.drinkfinder.android.util
+package uk.co.randomcoding.drinkfinder.android
 
-import android.os.Environment
-import java.io.File
 import android.app.Activity
+import android.os.Bundle
+import SearchDrinkActivity._
+import util.ExternalStorageHelper._
+import android.util.Log
 
 /**
- * Helper functions to access external storage state and files.
+ * Activity to get and display all search results
  *
  * @author RandomCoder <randomcoder@randomcoding.co.uk>
  *
- * Created On: 1 Aug 2012
+ * Created On: 4 Aug 2012
  */
-object ExternalStorageHelper {
+class DisplayResultsActivity extends Activity with TypedActivity {
 
-  def externalStorageState(): ExternalStorageState.state = {
+  private[this] def TAG = "Display Results Activity"
 
-    val state = Environment.getExternalStorageState();
+  override def onCreate(savedInstanceState: Bundle) {
+    super.onCreate(savedInstanceState)
 
-    state match {
-      case Environment.MEDIA_MOUNTED => ExternalStorageState.MOUNTED_WRITABLE
-      case Environment.MEDIA_MOUNTED_READ_ONLY => ExternalStorageState.MOUNTED_READ_ONLY
-      case _ => ExternalStorageState.NOT_USABLE
-    }
+    val intent = getIntent
+    val festivalId = intent.getStringExtra(FESTIVAL_ID_EXTRA)
+
+    val dataFile = festivalDataFile(this, festivalId)
+    val nameSearch = intent.getStringExtra(NAME_SEARCH_EXTRA)
+    val descriptionSearch = intent.getStringExtra(DESCRIPTION_SEARCH_EXTRA)
+    Log.d(TAG, "Name: %s; Description: %s; Festival: %s".format(nameSearch, descriptionSearch, festivalId))
   }
-
-  def festivalDataFile(activity: Activity, festivalId: String): File = new File(activity.getExternalFilesDir(null), "%sData.json".format(festivalId))
-}
-
-object ExternalStorageState extends Enumeration {
-  type state = Value
-  val MOUNTED_WRITABLE, MOUNTED_READ_ONLY, NOT_USABLE = Value
 }
