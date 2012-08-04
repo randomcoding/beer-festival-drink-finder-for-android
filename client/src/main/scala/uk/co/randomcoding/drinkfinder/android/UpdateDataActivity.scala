@@ -35,11 +35,15 @@ import org.apache.http.HttpStatus
 import java.io.IOException
 import uk.co.randomcoding.drinkfinder.android.util.RestDownloader
 import java.io.FileOutputStream
-import uk.co.randomcoding.drinkfinder.android.util.BackgroundDownloader
 import android.content.Intent
 import android.util.Log
 import uk.co.randomcoding.drinkfinder.android.util.RestDownloader
 import java.io.OutputStream
+import android.app.Dialog
+import android.content.DialogInterface
+import android.app.AlertDialog
+
+import uk.co.randomcoding.drinkfinder.android.util.DialogueHelpers._
 
 /**
  * Activity view to handle the update of the apps data cache.
@@ -51,6 +55,9 @@ import java.io.OutputStream
 class UpdateDataActivity extends Activity with TypedActivity {
 
   private[this] val TAG = "Update Data Activity"
+
+  private[this] val DOWNLOAD_SUCCESS_DIALOGUE = 1
+  private[this] val DOWNLOAD_FAILED_DIALOGUE = 2
 
   override def onCreate(state: Bundle) = {
     super.onCreate(state)
@@ -70,13 +77,39 @@ class UpdateDataActivity extends Activity with TypedActivity {
 
       Log.d(TAG, "Downloaded %d bytes".format(downloadResult))
 
-      if (downloadResult > 0) startActivity(new Intent(this, classOf[SearchDrinkActivity])) else Log.e(TAG, "Failed to download Data!")
+      if (downloadResult > 0) {
+        showDialog(DOWNLOAD_SUCCESS_DIALOGUE)
+        //startActivity(new Intent(this, classOf[SearchDrinkActivity]))
+      }
+      else {
+        Log.e(TAG, "Failed to download Data!")
+      }
     }
     catch {
-      case e: Exception => Log.e(TAG, "Caught Exception: %s".format(e.getMessage), e)
-      // TODO display dialog to tell user download failed.
+      case e: Exception => {
+        Log.e(TAG, "Caught Exception: %s".format(e.getMessage), e)
+        showDialog(DOWNLOAD_FAILED_DIALOGUE)
+      }
     }
 
+  }
+
+  override protected def onCreateDialog(dialogueId: Int): Dialog = {
+    dialogueId match {
+      case DOWNLOAD_SUCCESS_DIALOGUE => {
+        val switchToSearchFunc = (d: DialogInterface, id: Int) => startActivity(new Intent(this, classOf[SearchDrinkActivity]))
+        buildAlertDialogue(this, "Successfully Downloaded Festival Data", false, Some(("Ok", switchToSearchFunc)))
+      }
+      case DOWNLOAD_FAILED_DIALOGUE => {
+        val switchToMainFunc = (d: DialogInterface, id: Int) => startActivity(new Intent(this, classOf[MainActivity]))
+        buildAlertDialogue(this, "Failed to Downloaded Festival Data", false, Some(("Ok", switchToMainFunc)))
+      }
+      case _ => {
+        Log.e(TAG, "Unknown Dialogue Id: %d".format(dialogueId))
+
+        null
+      }
+    }
   }
 
 }
