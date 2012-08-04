@@ -13,9 +13,22 @@
 	<string name="all_drinks_api_update_uri">/api/drinks/%%FEST_ID%%/all</string>
 	<string name="select_festival_spinner_prompt">Select Festival</string>
 	<string name="temp_wbf_festival_name">Worcester CAMRA Beer, Cider &amp; Perry Festival</string>
+	<string name="search_page_title">Search for Drinks</string>
+	<string name="drink_name_search">Drink Name</string>
+	<string name="drink_description_search">Description</string>
+	<string name="drink_type_search">Drink Type</string>
+	<string name="drink_style_search">Drink Style</string>
+	<string name="drink_abv_search">ABV</string>
+	<string name="drink_price_search">Price</string>
+	<string name="drink_brewer_name_search">Brewer Name</string>
+	<string name="drink_name_search_hint">Name Contains…</string>
+	<string name="drink_description_search_hint">Description Contains…</string>
+	<string name="drink_search_button_test">Find Drinks…</string>
 
 	<string-array name="available_festival_names">
 		<item>Worcester CAMRA Beer, Cider &amp; Perry</item>
 	</string-array>
+
+	<string name="title_activity_display_results">Search Results</string>
 
 </resources>
