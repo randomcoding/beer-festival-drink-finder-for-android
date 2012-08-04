@@ -3,6 +3,8 @@ import sbt._
 import Keys._
 import AndroidKeys._
 
+import scala.io.Source
+
 object General {
   val settings = Defaults.defaultSettings ++ Seq (
     name := "Beer Festival Drink Finder",
@@ -24,7 +26,7 @@ object General {
     proguardSettings ++
     AndroidManifestGenerator.settings ++
     AndroidMarketPublish.settings ++ Seq (
-      keyalias in Android := "change-me", // TODO: Make this dreived from a variable read from a file
+      keyalias in Android := keyAlias,
       libraryDependencies += "org.scalatest" %% "scalatest" % "1.8" % "test"
     )
 
@@ -35,6 +37,12 @@ object General {
       mainAssetsPath <<= (baseDirectory, assetsDirectoryName) (_ / _)
     )
   )
+
+  // Read the key alias for the key store from the key.properties file
+  lazy val keyAlias = Source.fromFile("keystore.properties").getLines.toList.filter(_.startsWith("key.alias")) match {
+    case head :: _ => head.split("=")(1)
+    case Nil => "unknown key"
+  }
 }
 
 object AndroidBuild extends Build {
