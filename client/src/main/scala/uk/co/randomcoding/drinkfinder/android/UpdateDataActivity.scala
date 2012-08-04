@@ -79,10 +79,10 @@ class UpdateDataActivity extends Activity with TypedActivity {
 
       if (downloadResult > 0) {
         showDialog(DOWNLOAD_SUCCESS_DIALOGUE)
-        //startActivity(new Intent(this, classOf[SearchDrinkActivity]))
       }
       else {
         Log.e(TAG, "Failed to download Data!")
+        showDialog(DOWNLOAD_FAILED_DIALOGUE)
       }
     }
     catch {
@@ -98,11 +98,11 @@ class UpdateDataActivity extends Activity with TypedActivity {
     dialogueId match {
       case DOWNLOAD_SUCCESS_DIALOGUE => {
         val switchToSearchFunc = (d: DialogInterface, id: Int) => startActivity(new Intent(this, classOf[SearchDrinkActivity]))
-        buildAlertDialogue(this, "Successfully Downloaded Festival Data", false, Some(("Ok", switchToSearchFunc)))
+        alertDialogue(this, "Successfully Downloaded Festival Data", false, Some(("Ok", switchToSearchFunc)))
       }
       case DOWNLOAD_FAILED_DIALOGUE => {
         val switchToMainFunc = (d: DialogInterface, id: Int) => startActivity(new Intent(this, classOf[MainActivity]))
-        buildAlertDialogue(this, "Failed to Downloaded Festival Data", false, Some(("Ok", switchToMainFunc)))
+        alertDialogue(this, "Failed to Downloaded Festival Data", false, Some(("Ok", switchToMainFunc)))
       }
       case _ => {
         Log.e(TAG, "Unknown Dialogue Id: %d".format(dialogueId))

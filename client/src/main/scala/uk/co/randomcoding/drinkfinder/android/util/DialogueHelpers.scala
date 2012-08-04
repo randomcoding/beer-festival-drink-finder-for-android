@@ -33,11 +33,31 @@ import android.content.Context
  */
 object DialogueHelpers {
 
-  type DialogueButtonFunc = (DialogInterface, Int) => Unit
+  private type DialogueButtonFunc = (DialogInterface, Int) => Unit
+
+  /**
+   * A pair of a `String` and `(DialogInterface, Int) => Unit`.
+   *
+   * These are used as the input types to create a button on a `Dialog`
+   */
   type DialogueButtonParam = (String, DialogueButtonFunc)
+
+  /**
+   * The function type used for the dismiss listener of a dialog
+   */
   type DismissDialogueFunc = DialogInterface => Unit
 
-  def buildAlertDialogue(context: Context, message: String, cancelable: Boolean,
+  /**
+   * Build an `AlertDialog`
+   *
+   * @param context The Activity Context that is calling this method. Allows the Dialog to be correctly parented.
+   * @param message The text to display on the dialogue
+   * @param cancelable If `true` the dialogue can be cancelled, or not if `false`
+   * @param positiveButton An Optional `DialogueButtonParam` that will set the positive button if defined.
+   * @param negativeButton An Optional `DialogueButtonParam` that will set the negative button if defined.
+   * @param neutralButton An Optional `DialogueButtonParam` that will set the neutral button if defined.
+   */
+  def alertDialogue(context: Context, message: String, cancelable: Boolean,
     positiveButton: Option[DialogueButtonParam],
     negativeButton: Option[DialogueButtonParam] = None,
     neutralButton: Option[DialogueButtonParam] = None,
@@ -59,7 +79,7 @@ object DialogueHelpers {
     }
   }
 
-  implicit def functionToDialogueOnClickListener(f: (DialogInterface, Int) => Unit): DialogInterface.OnClickListener = {
+  private implicit def functionToDialogueOnClickListener(f: DialogueButtonFunc): DialogInterface.OnClickListener = {
     new DialogInterface.OnClickListener() {
       override def onClick(dialogue: DialogInterface, id: Int) {
         f(dialogue, id)
@@ -67,7 +87,7 @@ object DialogueHelpers {
     }
   }
 
-  implicit def functionToOnDismissListener(f: (DialogInterface) => Unit): DialogInterface.OnDismissListener = {
+  private implicit def functionToOnDismissListener(f: DismissDialogueFunc): DialogInterface.OnDismissListener = {
     new DialogInterface.OnDismissListener() {
       override def onDismiss(dialogue: DialogInterface) {
         f(dialogue)
