@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="uk.co.randomcoding.drinkfinder.android" >
 
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+
 	<application
 		android:debuggable="true"
 		android:icon="@drawable/android:star_big_on"
