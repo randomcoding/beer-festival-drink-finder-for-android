@@ -28,9 +28,10 @@ import java.io.OutputStream
 import org.apache.http.HttpResponse
 import org.apache.http.client.ClientProtocolException
 import org.apache.http.client.HttpClient
+import android.util.Log
 
 /**
- * TODO: Comment for
+ * Download data from a rest endpoint
  *
  * @author RandomCoder <randomcoder@randomcoding.co.uk>
  *
@@ -38,14 +39,27 @@ import org.apache.http.client.HttpClient
  */
 object RestDownloader {
 
-  def getUri(dataUri: String, outStream: OutputStream): Long = {
+  private[this] def TAG = "Rest Downloader"
+
+  /**
+   * Performs a `Http GET` request with the given Uri and writes the response to
+   * the provided `OutputStream`
+   *
+   * @throws IOException If the URI cannot be accessed or the `OutputStream` accessed
+   */
+  def uriGet(uri: String, outStream: OutputStream): Long = {
+    Log.d(TAG, "Accessing Uri: %s".format(uri))
+
     val downloader = new DefaultHttpClient()
-    val response = downloader.execute(new HttpGet(dataUri))
+    val response = downloader.execute(new HttpGet(uri))
+    Log.d(TAG, "Performed Request")
     val statusLine = response.getStatusLine
     statusLine.getStatusCode match {
       case HttpStatus.SC_OK => {
         response.getEntity.writeTo(outStream)
         outStream.close()
+        Log.d(TAG, "Received Data: %s".format(outStream.toString))
+
         response.getEntity.getContentLength
       }
       case _ => {

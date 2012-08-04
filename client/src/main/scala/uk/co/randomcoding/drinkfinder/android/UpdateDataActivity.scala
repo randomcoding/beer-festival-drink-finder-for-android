@@ -37,6 +37,9 @@ import uk.co.randomcoding.drinkfinder.android.util.RestDownloader
 import java.io.FileOutputStream
 import uk.co.randomcoding.drinkfinder.android.util.BackgroundDownloader
 import android.content.Intent
+import android.util.Log
+import uk.co.randomcoding.drinkfinder.android.util.RestDownloader
+import java.io.OutputStream
 
 /**
  * Activity view to handle the update of the apps data cache.
@@ -47,6 +50,8 @@ import android.content.Intent
  */
 class UpdateDataActivity extends Activity with TypedActivity {
 
+  private[this] val TAG = "Update Data Activity"
+
   override def onCreate(state: Bundle) = {
     super.onCreate(state)
     setContentView(R.layout.activity_update_data)
@@ -54,19 +59,24 @@ class UpdateDataActivity extends Activity with TypedActivity {
 
   def updateData(view: View) {
     // TODO: Replace with looked up value (or derived from view data
-    val dataUri = "http://localhost:8080/api/WCBCF/drinks/all/"
+    val dataUri = "http://192.168.2.15:8080/api/WCBCF/drinks/all"
 
     // TODO: Add progress monitoring
     val dataFile = new File(getExternalFilesDir(null), "WCBCFData.json")
-    val downloadTask = new BackgroundDownloader
+    Log.d(TAG, "Got File Handle: %s".format(dataFile.getAbsolutePath))
+
     try {
-      downloadTask.execute((dataUri, new FileOutputStream(dataFile)))
-      val switchToSearch = new Intent(this, classOf[SearchDrinkActivity])
-      startActivity(switchToSearch)
+      val downloadResult = RestDownloader.uriGet(dataUri, new FileOutputStream(dataFile))
+
+      Log.d(TAG, "Downloaded %d bytes".format(downloadResult))
+
+      if (downloadResult > 0) startActivity(new Intent(this, classOf[SearchDrinkActivity])) else Log.e(TAG, "Failed to download Data!")
     }
     catch {
-      case ioe: IOException => // TODO Display Error
+      case e: Exception => Log.e(TAG, "Caught Exception: %s".format(e.getMessage), e)
+      // TODO display dialog to tell user download failed.
     }
+
   }
 
 }
