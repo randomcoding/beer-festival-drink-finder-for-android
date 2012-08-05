@@ -19,15 +19,14 @@
  */
 package uk.co.randomcoding.drinkfinder.android
 
+import uk.co.randomcoding.drinkfinder.android.SearchDrinkActivity.{ NAME_SEARCH_EXTRA, FESTIVAL_ID_EXTRA, DESCRIPTION_SEARCH_EXTRA }
+import uk.co.randomcoding.drinkfinder.android.model.drink.Drink
+import uk.co.randomcoding.drinkfinder.android.util.DrinkSearcher._
+import uk.co.randomcoding.drinkfinder.android.util.ExternalStorageHelper._
+
 import android.app.Activity
 import android.os.Bundle
-import SearchDrinkActivity._
-import util.ExternalStorageHelper._
 import android.util.Log
-import uk.co.randomcoding.drinkfinder.android.model.drink.Drink
-import java.io.File
-import uk.co.randomcoding.drinkfinder.android.util.JsonDrinkDataLoader
-import DrinkSearcher._
 
 /**
  * Activity to get and display all search results

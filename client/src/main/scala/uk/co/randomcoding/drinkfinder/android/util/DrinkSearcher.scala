@@ -17,15 +17,16 @@
  * Contributors:
  *    RandomCoder <randomcoder@randomcoding.co.uk> - initial API and implementation and/or initial documentation
  */
-package uk.co.randomcoding.drinkfinder.android
+package uk.co.randomcoding.drinkfinder.android.util
 
-import uk.co.randomcoding.drinkfinder.android.model.drink.Drink
 import java.io.File
-import android.os.Bundle
-import uk.co.randomcoding.drinkfinder.android.util.JsonDrinkDataLoader
-import android.util.Log
+
+import uk.co.randomcoding.drinkfinder.android.SearchDrinkActivity.{NAME_SEARCH_EXTRA, DESCRIPTION_SEARCH_EXTRA}
+import uk.co.randomcoding.drinkfinder.android.model.drink.Drink
+
 import android.app.Activity
-import SearchDrinkActivity._
+import android.os.Bundle
+import android.util.Log
 
 /**
  * Loads the current drink data from a file and finds matching entries based on the extra data passed in the bundle.
