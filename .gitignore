@@ -7,3 +7,6 @@ target/
 # File containing key store information
 keystore.properties
 
+# ignore android support jar as this is auto added by the plugin
+android-support-*.jar
+
