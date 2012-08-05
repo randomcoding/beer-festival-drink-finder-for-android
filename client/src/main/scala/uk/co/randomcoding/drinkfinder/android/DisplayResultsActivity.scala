@@ -83,12 +83,12 @@ class DisplayResultsActivity extends Activity with TypedActivity {
     // setup variable display entries
     val abvEntry = drink.abv match {
       case 0.0 => ("", "")
-      case abv => ("ABV", "%.1d%%".format(abv))
+      case abv => ("ABV", "%.1f%%".format(abv))
     }
 
     val priceEntry = drink.price match {
       case 0.0 => ("", "")
-      case price => ("Price", "£%.2d".format(price))
+      case price => ("Price", "£%.2f".format(price))
     }
 
     val descriptionText = drink.description.trim match {
