@@ -1,0 +1,91 @@
+[{
+  "drinkType":"Beer",
+  "name":"Dorothy Goodbody's Country Ale",
+  "description":"Strong, full-bodied ruby ale. A 2011 Suggestabeer from Nick Bracey of Walsall.",
+  "abv":"6.0",
+  "price":"£2.40",
+  "remaining":"Plenty",
+  "brewer":"Wye Valley",
+  "features":["Dark","Strong"]
+},{
+  "drinkType":"Beer",
+  "name":"Bohemia Pilsner",
+  "description":"Deep golden lager made to a typical Czech recipe with Pilsner yeast. Rich hop character.",
+  "abv":"4.8",
+  "price":"£2.30",
+  "remaining":"Plenty",
+  "brewer":"Wylam",
+  "features":["Lager","Golden"]
+},{
+  "drinkType":"Beer",
+  "name":"Aston Dark",
+  "description":"Dark tanned and complex ale lightly hopped with Fuggles. Underlying malt gives way to hints of dark chocolate and coffee.",
+  "abv":"3.6",
+  "price":"£2.10",
+  "remaining":"Plenty",
+  "brewer":"ABC",
+  "features":["Mild"]
+},{
+  "drinkType":"Beer",
+  "name":"Tangerine Duck",
+  "description":"Copper coloured beer with a hint of tangerine from the late addition of crystal hops. Named after the Atomic Boys famous duck Puskas at Blackpool FC in the 50s.",
+  "abv":"4.4",
+  "price":"£2.60",
+  "remaining":"Plenty",
+  "brewer":"Fuzzy Duck",
+  "features":["Brown","Best Bitter"]
+},{
+  "drinkType":"Beer",
+  "name":"Seville",
+  "description":"Dark Star's first fruit beer. Made with malted wheat as well as barley and Eldorado hops, matured with a hint of Spanish bitter oranges.",
+  "abv":"4.0",
+  "price":"£2.20",
+  "remaining":"Plenty",
+  "brewer":"Dark Star",
+  "features":["Stout / Porter","Speciality"]
+},{
+  "drinkType":"Beer",
+  "name":"Silent Slasher",
+  "description":"Blonde, lager style beer crafted with the finest extra pale malt and wheat. Deceivingly light, with hops chosen for their floral aroma and flavour. At 5.1% Silent Slasher is sweet with a refreshing, dry bitter finish.",
+  "abv":"5.1",
+  "price":"£2.50",
+  "remaining":"Plenty",
+  "brewer":"Dorset Piddle",
+  "features":["Lager","Golden"]
+},{
+  "drinkType":"Beer",
+  "name":"Noble 600",
+  "description":"Light and bitter, picking up the distinctive grapefruit/citrus aroma and taste from Citra hops.",
+  "abv":"4.5",
+  "price":"£2.20",
+  "remaining":"Not Yet Ready",
+  "brewer":"Kinver",
+  "features":["Golden"]
+},{
+  "drinkType":"Beer",
+  "name":"Stingray",
+  "description":"Strong and malty - yet extremely hoppy which gives a rich fruitiness.",
+  "abv":"5.5",
+  "price":"£2.40",
+  "remaining":"Not Yet Ready",
+  "brewer":"Devilfish",
+  "features":["Strong"]
+},{
+  "drinkType":"Beer",
+  "name":"Rotunda Red",
+  "description":"Traditional ruby coloured ale of distinct character.  Lightly hopped with English Fuggles, finished with the distinct aroma of Liberty hops and a toffee aftertaste.",
+  "abv":"4.8",
+  "price":"£2.20",
+  "remaining":"Plenty",
+  "brewer":"ABC",
+  "features":["Brown","Strong"]
+},{
+  "drinkType":"Beer",
+  "name":"Buttermere Beauty",
+  "description":"Golden pilsner style, made from lager malt, Saaz hops and a lager yeast fermented at cool temperature.",
+  "abv":"4.8",
+  "price":"£2.30",
+  "remaining":"Plenty",
+  "brewer":"Cumbrian Legendary Ales",
+  "features":["Lager","Golden"]
+}]
