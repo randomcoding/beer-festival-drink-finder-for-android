@@ -33,27 +33,27 @@ import scala.util.parsing.json.JSONObject
  */
 case class Drink(drinkType: DrinkType.drinkType, name: String, description: String, abv: Double, price: Double, remaining: String, brewer: String, features: List[String])
 
+/**
+ * Provides parsing of drink JSON data into a `List[Drink]`
+ */
 object Drink {
+  private[this] val TAG = "Drink Parser"
+
   def fromJson(jsonData: String): Seq[Drink] = {
-    println("Parsing: \n%s".format(jsonData))
     JSON.parseFull(jsonData) match {
       case Some(data) => data match {
-        case drinks: List[_] => {
-          drinks.map(_ match {
-            case drinkMap: Map[_, _] => Some(drinkFromMap(drinkMap map (entry => (entry._1.toString -> entry._2))))
-            case _ => None
-          }).filter(_.isDefined).map(_.get)
-        }
+        case jsonDrinks: List[_] => jsonDrinks.map(_ match {
+          case drinkMap: Map[_, _] => Some(drinkFromMap(drinkMap map (entry => (entry._1.toString -> entry._2))))
+          case _ => None
+        }).filter(_.isDefined).map(_.get)
         case drinkMap: Map[_, _] => Seq(drinkFromMap(drinkMap map (entry => (entry._1.toString -> entry._2))))
         case other => {
-          println("Unknown JSON Object: %s".format(other))
-          //Log.e("Drink Parser", "Unknown JSON Object: %s".format(other))
+          Log.e(TAG, "Unknown JSON Object: %s".format(other))
           Nil
         }
       }
       case failedParse => {
-        println("Failed to Parse:\n%s".format(failedParse))
-        //Log.e("Drink Parser", "Failed to Parse:\n%s".format(failedParse))
+        Log.e(TAG, "Failed to Parse:\n%s".format(failedParse))
         Nil
       }
     }
@@ -68,7 +68,6 @@ object Drink {
     val remaining = drinkMap("remaining").toString
     val brewer = drinkMap("brewer").toString
     val features = drinkMap("features").asInstanceOf[List[String]]
-    println("Got Features: %s".format(features))
 
     Drink(DrinkType(drinkType), drinkName, description, abv, price, remaining, brewer, features)
   }
