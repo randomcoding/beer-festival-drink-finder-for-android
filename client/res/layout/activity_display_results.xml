@@ -6,10 +6,16 @@
 	android:orientation="vertical" >
 
 	<TextView
-		android:layout_width="wrap_content"
+		android:id="@+id/drinkResultsTitle"
+		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:padding="@dimen/padding_medium"
-		android:text="@string/hello_world"
-		tools:context=".DisplayResultsActivity" />
+		android:text="@string/drink_results_title"
+		android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	<TableLayout
+		android:id="@+id/drinkResultsTableLayout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" >
+	</TableLayout>
 
 </LinearLayout>

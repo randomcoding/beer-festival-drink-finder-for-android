@@ -24,11 +24,13 @@
 	<string name="drink_name_search_hint">Name Contains…</string>
 	<string name="drink_description_search_hint">Description Contains…</string>
 	<string name="drink_search_button_test">Find Drinks…</string>
+	<string name="drink_results_title">Drink Results</string>
 
 	<string-array name="available_festival_names">
 		<item>Worcester CAMRA Beer, Cider &amp; Perry</item>
 	</string-array>
 
 	<string name="title_activity_display_results">Search Results</string>
+	<string name="title_activity_display_drink">Display Drink</string>
 
 </resources>
