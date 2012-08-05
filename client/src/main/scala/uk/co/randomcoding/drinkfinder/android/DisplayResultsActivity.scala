@@ -58,6 +58,11 @@ class DisplayResultsActivity extends Activity with TypedActivity {
     displayResults(matchingDrinks)
   }
 
+  private[this] implicit def bundleToSearchMap(b: Bundle): Map[String, String] = {
+    Map(NAME_SEARCH_EXTRA -> b.getString(NAME_SEARCH_EXTRA),
+      DESCRIPTION_SEARCH_EXTRA -> b.getString(DESCRIPTION_SEARCH_EXTRA))
+  }
+
   private[this] def displayResults(drinks: Seq[Drink]) {
     // TODO: Clear display and create new entries
   }

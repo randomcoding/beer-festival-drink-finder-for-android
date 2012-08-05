@@ -21,7 +21,7 @@ package uk.co.randomcoding.drinkfinder.android.util
 
 import java.io.File
 
-import uk.co.randomcoding.drinkfinder.android.SearchDrinkActivity.{NAME_SEARCH_EXTRA, DESCRIPTION_SEARCH_EXTRA}
+import uk.co.randomcoding.drinkfinder.android.SearchDrinkActivity.{ NAME_SEARCH_EXTRA, DESCRIPTION_SEARCH_EXTRA }
 import uk.co.randomcoding.drinkfinder.android.model.drink.Drink
 
 import android.app.Activity
@@ -45,7 +45,7 @@ object DrinkSearcher {
 
   private[this] val matchAny = (drink: Drink) => true
 
-  def getMatchingDrinks(activity: Activity, dataFile: File, searchData: Bundle, loadFailedDialogueId: Int): Seq[Drink] = {
+  def getMatchingDrinks(activity: Activity, dataFile: File, searchData: Map[String, String], loadFailedDialogueId: Int): Seq[Drink] = {
     val drinkData = loadDrinks(activity, dataFile, loadFailedDialogueId)
     val searchFuncs = getSearchFuncs(searchData)
 
@@ -56,17 +56,19 @@ object DrinkSearcher {
     searchFunctions.filter(_(drink) == false).isEmpty
   }
 
-  private[this] def getSearchFuncs(extras: Bundle): Seq[Drink => Boolean] = {
+  private[this] def getSearchFuncs(extras: Map[String, String]): Seq[Drink => Boolean] = {
     for {
       key <- searchExtraKeys
-      if extras.containsKey(key)
-      searchFuncOpt = key match {
-        case NAME_SEARCH_EXTRA => Some(drinkNameSearch(_: Drink, extras.getString(key)))
-        case DESCRIPTION_SEARCH_EXTRA => Some(drinkDescriptionSearch(_: Drink, extras.getString(key).replaceAll("""[,._-]""", " ").split("""\s""")))
-        case _ => {
-          Log.e(TAG, "Unhandled key: %s".format(key))
-          None
+      searchFuncOpt = extras.get(key) match {
+        case Some(v) => key match {
+          case NAME_SEARCH_EXTRA => Some(drinkNameSearch(_: Drink, v))
+          case DESCRIPTION_SEARCH_EXTRA => Some(drinkDescriptionSearch(_: Drink, v.replaceAll("""[,._-]""", " ").split("""\s""")))
+          case _ => {
+            Log.e(TAG, "Unhandled key: %s".format(key))
+            None
+          }
         }
+        case _ => None
       }
       if searchFuncOpt.isDefined
     } yield { searchFuncOpt.get }
