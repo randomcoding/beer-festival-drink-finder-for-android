@@ -31,7 +31,7 @@ import scala.io.Source
  *
  * Created On: 5 Aug 2012
  */
-class DrinkFronJsonTest extends FunSuite with ShouldMatchers with GivenWhenThen {
+class DrinkFromJsonTest extends FunSuite with ShouldMatchers with GivenWhenThen {
   private[this] val drinkJson = """{
   "drinkType":"Beer",
   "name":"Dorothy Goodbody's Country Ale",
