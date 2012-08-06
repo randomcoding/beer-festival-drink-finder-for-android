@@ -31,6 +31,7 @@ import android.widget.TableRow
 import android.widget.TextView
 import android.view.View
 import android.content.Intent
+import android.widget.TableLayout
 
 /**
  * Activity to get and display all search results
@@ -49,7 +50,7 @@ class DisplayResultsActivity extends Activity with TypedActivity {
 
   override def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
-
+    setContentView(R.layout.activity_display_results)
     val intent = getIntent
     val festivalId = intent.getStringExtra(FESTIVAL_ID_EXTRA)
 
@@ -70,13 +71,16 @@ class DisplayResultsActivity extends Activity with TypedActivity {
   }
 
   private[this] def displayResults(drinks: List[Drink]) {
+    val titleText = findView(TR.drinkResultsTitle)
+    titleText.setText("Search Results: (%d)".format(drinks.size))
     val layout = findView(TR.drinkResultsTableLayout)
+    layout.removeAllViewsInLayout
     drinks.sortBy(_.name) foreach (drink => {
       layout.addView(drinkToRow(drink))
     })
-    // TODO: Clear display and create new entries
   }
 
+  // TODO: This should probably use a fragment or similar to wrap the text and such like. Also add a show button maybe rather than press on the whole entry
   private[this] def drinkToRow(drink: Drink): TableRow = {
     val row = new TableRow(this)
 
@@ -93,7 +97,7 @@ class DisplayResultsActivity extends Activity with TypedActivity {
 
     val descriptionText = drink.description.trim match {
       case "" => ""
-      case description => "\nDescription: %s".format(description)
+      case description => "Description: %s\n".format(description)
     }
 
     val variableText = Seq(abvEntry, priceEntry).map(_ match {

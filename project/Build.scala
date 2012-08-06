@@ -14,9 +14,12 @@ object General {
     platformName in Android := "android-10"
   )
 
+  val keptClasses = Seq("scala.Function1", "scala.Tuple2", "scala.collection.Seq", "scala.Option", "scala.Function2", "scala.collection.immutable.Map",
+    "scala.collection.immutable.List", "scala.Enumeration$Value")
+
   val proguardSettings = Seq (
     useProguard in Android := true,
-    proguardOption in Android := "-keep class scala.Function1, scala.Tuple2, scala.collection.Seq, scala.Option, scala.Function2"
+    proguardOption in Android := "-keep class %s".format(keptClasses.mkString(", "))
   )
 
   lazy val fullAndroidSettings =

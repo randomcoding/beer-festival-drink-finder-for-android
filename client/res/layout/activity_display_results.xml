@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/LinearLayout1"
+	android:id="@+id/drinkResultsMainLayout"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical" >
@@ -12,10 +12,16 @@
 		android:text="@string/drink_results_title"
 		android:textAppearance="?android:attr/textAppearanceLarge" />
 
-	<TableLayout
-		android:id="@+id/drinkResultsTableLayout"
+	<ScrollView
+		android:id="@+id/drinkResultsScrollView"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content" >
-	</TableLayout>
+
+		<TableLayout
+			android:id="@+id/drinkResultsTableLayout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" >
+		</TableLayout>
+	</ScrollView>
 
 </LinearLayout>
