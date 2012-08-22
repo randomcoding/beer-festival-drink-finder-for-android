@@ -12,16 +12,12 @@
 		android:text="@string/drink_results_title"
 		android:textAppearance="?android:attr/textAppearanceLarge" />
 
-	<ScrollView
-		android:id="@+id/drinkResultsScrollView"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content" >
-
-		<TableLayout
-			android:id="@+id/drinkResultsTableLayout"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content" >
-		</TableLayout>
-	</ScrollView>
+	<TextView
+		android:id="@+id/drinkResultsContentText"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:padding="6dp"
+		android:scrollHorizontally="true"
+		android:textSize="24dp" />
 
 </LinearLayout>

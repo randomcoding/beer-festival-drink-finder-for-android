@@ -32,6 +32,8 @@ import android.widget.TextView
 import android.view.View
 import android.content.Intent
 import android.widget.TableLayout
+import android.widget.ArrayAdapter
+import android.app.ListActivity
 
 /**
  * Activity to get and display all search results
@@ -40,7 +42,7 @@ import android.widget.TableLayout
  *
  * Created On: 4 Aug 2012
  */
-class DisplayResultsActivity extends Activity with TypedActivity {
+class DisplayResultsActivity extends ListActivity with TypedActivity {
 
   val DISPLAY_DRINK_NAME_EXTRA = "uk.co.randomcoding.android.drinkfinder.display_drink_name"
 
@@ -56,10 +58,6 @@ class DisplayResultsActivity extends Activity with TypedActivity {
 
     val dataFile = festivalDataFile(this, festivalId)
 
-    val nameSearch = intent.getStringExtra(NAME_SEARCH_EXTRA)
-    val descriptionSearch = intent.getStringExtra(DESCRIPTION_SEARCH_EXTRA)
-    Log.d(TAG, "Name: %s; Description: %s; Festival: %s".format(nameSearch, descriptionSearch, festivalId))
-
     val matchingDrinks = getMatchingDrinks(this, dataFile, intent.getExtras, FAILED_TO_PARSE_DIALOGUE_ID).toList
 
     displayResults(matchingDrinks)
@@ -73,16 +71,20 @@ class DisplayResultsActivity extends Activity with TypedActivity {
   private[this] def displayResults(drinks: List[Drink]) {
     val titleText = findView(TR.drinkResultsTitle)
     titleText.setText("Search Results: (%d)".format(drinks.size))
-    val layout = findView(TR.drinkResultsTableLayout)
-    layout.removeAllViewsInLayout
-    drinks.sortBy(_.name) foreach (drink => {
-      layout.addView(drinkToRow(drink))
-    })
+
+    val drinkTitles = drinks match {
+      case Nil => Array("There are no drinkd matching your search")
+      case _ => drinks.map(drinkToText).toArray
+    }
+
+    setListAdapter(new ArrayAdapter[String](this, R.id.drinkResultsContentText, drinkTitles))
   }
 
-  // TODO: This should probably use a fragment or similar to wrap the text and such like. Also add a show button maybe rather than press on the whole entry
-  private[this] def drinkToRow(drink: Drink): TableRow = {
-    val row = new TableRow(this)
+  private[this] def drinkToText(drink: Drink): String = {
+    val descriptionText = drink.description.trim match {
+      case "" => ""
+      case description => "Description: %s\n".format(description)
+    }
 
     // setup variable display entries
     val abvEntry = drink.abv match {
@@ -95,23 +97,11 @@ class DisplayResultsActivity extends Activity with TypedActivity {
       case price => ("Price", "£%.2f".format(price))
     }
 
-    val descriptionText = drink.description.trim match {
-      case "" => ""
-      case description => "Description: %s\n".format(description)
-    }
-
     val variableText = Seq(abvEntry, priceEntry).map(_ match {
       case ("", "") => ""
       case (label, text) => "%s: %s".format(label, text)
     }).mkString("   ")
 
-    val displayText = "%s\n%s%s".format(drink.name, descriptionText, variableText)
-    val textView = new TextView(this)
-    textView.setText(displayText)
-    row.setClickable(true)
-    row.setOnClickListener((view: View) => openActivity(this, classOf[DisplayDrinkActivity], Map(DISPLAY_DRINK_NAME_EXTRA -> drink.name)))
-    row.addView(textView)
-
-    row
+    "%s\n%s%s".format(drink.name, descriptionText, variableText)
   }
 }

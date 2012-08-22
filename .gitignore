@@ -3,6 +3,7 @@
 bin/
 gen/
 target/
+.scala_dependencies
 
 # File containing key store information
 keystore.properties
