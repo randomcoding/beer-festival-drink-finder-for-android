@@ -1,3 +1,4 @@
-alias API-10 = ;project client;android:emulator-start API-10;
-alias launch-client = ;project client;android:start-emulator;
-alias test-client = ;project client;test;
+alias API-10 = ;project client;android:emulator-start API-10
+alias launch-client = ;project client;android:start-emulator
+alias test-client = ;project client;test
+alias package-client = ;project client;android:package-debug

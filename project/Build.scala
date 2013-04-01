@@ -11,6 +11,8 @@ object General {
     version := "0.1",
     versionCode := 0,
     scalaVersion := "2.9.2",
+    scalacOptions := Seq("-deprecation", "-unchecked"),
+    javacOptions ++= Seq("-target", "1.6", "-source", "1.6"),
     platformName in Android := "android-10"
   )
 
