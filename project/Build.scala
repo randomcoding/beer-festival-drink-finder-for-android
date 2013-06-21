@@ -5,12 +5,19 @@ import AndroidKeys._
 
 import scala.io.Source
 
+object Common {
+  val buildVersion = "0.1"
+  val buildScalaVersion = "2.9.2"
+}
+
 object General {
+
   val settings = Defaults.defaultSettings ++ Seq (
     name := "Beer Festival Drink Finder",
-    version := "0.1",
+    version := Common.buildVersion,
     versionCode := 0,
-    scalaVersion := "2.9.2",
+    scalaVersion := Common.buildScalaVersion,
+    shellPrompt := ShellPrompt.buildShellPrompt,
     scalacOptions := Seq("-deprecation", "-unchecked"),
     javacOptions ++= Seq("-target", "1.6", "-source", "1.6"),
     platformName in Android := "android-10"
